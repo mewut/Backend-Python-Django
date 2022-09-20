@@ -1,0 +1,36 @@
+{% extends 'flatpages/default.html' %}
+
+<!-- Название -->
+{% block title %}
+АЙ
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+    <h1>ОЙ</h1>
+    {% if news %}
+        <table>
+            <tr>
+                <td> Title </td>
+                <td> Category </td>
+                <td> Author </td>
+                <td> Publish date </td>
+                <td> Text </td>
+                <td> Rating </td>
+            </tr>
+            <hr>
+            {% for new in news %}
+            <tr>
+                <td>{{ new.title }}</td>
+                <td>{{ new.postCategory }}</td>
+                <td>{{ new.author }}</td>
+                <td>{{ new.dateCreation }}</td>
+                <td>{{ new.text }}</td>
+                <td>{{ new.rating }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2> АЩЩЩЩ </h2>
+    {% endif %}
+{% endblock content %}
