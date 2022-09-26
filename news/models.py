@@ -19,7 +19,6 @@ class Author(models.Model):
         cRat = 0
         cRat += commentRat.get('commentRating')
         # суммарный рейтинг всех комментариев автора
-
         self.ratingAuthor = pRat *3 + cRat
         self.save()
         # суммарный рейтинг каждой статьи автора умножается на 3
@@ -41,16 +40,15 @@ class Category(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-
     NEWS = 'NW'
     ARTICLE = 'AR'
     CATEGORY_CHOICES = (
         (NEWS, 'Новость'),
         (ARTICLE, 'Статья')
     )
-    categoryType = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default=ARTICLE)
-    dateCreation = models.DateTimeField(auto_now_add=True)
-    postCategory = models.ManyToManyField(Category, through='PostCategory')
+    category_type = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default=ARTICLE)
+    date_creation = models.DateTimeField(auto_now_add=True)
+    post_category = models.ManyToManyField(Category, through='PostCategory')
     title = models.CharField(max_length=128)
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
@@ -92,4 +90,3 @@ class Comment(models.Model):
     def dislike(self):
         self.rating -= 1
         self.save()
-

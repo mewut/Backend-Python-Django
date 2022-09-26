@@ -89,4 +89,3 @@ class ProfileUserUpdate(LoginRequiredMixin, UpdateView):
     model = Author
     template_name = 'profile_edit.html'
     success_url = reverse_lazy('home')
-

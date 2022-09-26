@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.views.generic.edit import CreateView
-from .models import BaseRegisterForm
+from .forms import BaseRegisterForm
 
 
 class BaseRegisterView(CreateView):
