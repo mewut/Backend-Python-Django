@@ -4,7 +4,6 @@ from django.forms import ModelForm
 
 
 class BasicSignupForm(SignupForm):
-
     def save(self, request):
         user = super(BasicSignupForm, self).save(request)
         common_group = Group.objects.get(name='common')
@@ -13,7 +12,6 @@ class BasicSignupForm(SignupForm):
 
 
 class SocialSignupForm(SignupForm):
-
     def save(self, request):
         user = super(SocialSignupForm, self).save(request)
         basic_group = Group.objects.get(name='common')
@@ -22,7 +20,6 @@ class SocialSignupForm(SignupForm):
 
 
 class UpdateProfileForm(ModelForm):
-
     class Meta:
         model = User
         fields = [
@@ -32,4 +29,13 @@ class UpdateProfileForm(ModelForm):
             'last_name',
             'is_staff',
             'groups',
+        ]
+
+
+class BaseRegisterForm(ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name'
         ]

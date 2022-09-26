@@ -1,9 +1,18 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Post, Author
+from .models import Post, User
 
 
-class PostForm(forms.ModelForm):
+class ProfileUserForm(forms.Form):
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name'
+        ]
+
+
+class PostForm(forms.Form):
     class Meta:
         model = Post
         fields = [
@@ -28,16 +37,12 @@ class PostForms(forms.Form):
             raise ValidationError({
                 'title': 'Описание не может быть менее 20 символов.'
             })
-
         if title[0].islower():
             raise ValidationError({
                 'title': 'Описание не может начинаться с маленькой буквы.'
             })
-
         if text == title:
             raise ValidationError(
                 'Описание не должно быть идентично тексту поста.'
             )
-
         return cleaned_data
-
