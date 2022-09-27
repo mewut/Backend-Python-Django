@@ -65,7 +65,10 @@ class Post(models.Model):
         return self.text[0:123] + '...'
 
     def get_absolute_url(self):
-        return reverse('product_detail', args=[str(self.id)])
+        return f'/news/{self.id}'
+
+
+    #    return reverse('product_detail', args=[str(self.id)])
 
     # def __str__(self):
     #     return f'{self.title}: {self.dateCreation("%m:%d:%Y")}: {self.postCategory}'
@@ -74,6 +77,9 @@ class Post(models.Model):
 class PostCategory(models.Model):
     postThrought = models.ForeignKey(Post, on_delete=models.CASCADE)
     categoryThrought = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.categoryThrough} | {self.postThrough}'
 
 
 class Comment(models.Model):
@@ -90,3 +96,6 @@ class Comment(models.Model):
     def dislike(self):
         self.rating -= 1
         self.save()
+
+    def __str__(self):
+        return f'{self.commentPost} | {self.text}'

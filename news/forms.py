@@ -3,31 +3,18 @@ from django.core.exceptions import ValidationError
 from .models import Post, User
 
 
-class ProfileUserForm(forms.Form):
-    class Meta:
-        model = User
-        fields = [
-            'first_name',
-            'last_name'
-        ]
-
-
 class PostForm(forms.Form):
     class Meta:
         model = Post
-        fields = [
-            'post_category',
-            'title',
-            'text',
-            'category_type',
-        ]
+        fields = ('author', 'categoryType', 'postCategory', 'title', 'text')
 
-
-class PostForms(forms.Form):
-    title = forms.CharField(label='Заголовок')
-    text = forms.CharField(label='Текст')
-    category_type = forms.ModelChoiceField(label='Метка', queryset=Post.objects.all())
-    post_category = forms.ModelChoiceField(label='Категория', queryset=Post.objects.all())
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+        self.fields['author'].label = "Автор:"
+        self.fields['categoryType'].label = "Тип публикации:"
+        self.fields['postCategory'].label = "Категория:"
+        self.fields['title'].label = "Название публикации:"
+        self.fields['text'].label = "Текст публикации:"
 
     def clean(self):
         cleaned_data = super().clean()
@@ -46,3 +33,12 @@ class PostForms(forms.Form):
                 'Описание не должно быть идентично тексту поста.'
             )
         return cleaned_data
+
+
+class ProfileUserForm(forms.Form):
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name'
+        ]
