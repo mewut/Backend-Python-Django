@@ -19,11 +19,11 @@ pip install celery
 
    [Ссылка на модуль](https://github.com/mewut/NewsPortal-2-units)
 
-4. Модуль D5. Авторизация и регистрация
+4. Модуль D5. Авторизация и регистрация.
 
    [Ссылка на модуль](https://github.com/mewut/Backend-Python-Django/tree/D5)
 
-5. Модуль D6. Работа с почтой и выполнение задач по расписанию
+5. Модуль D6. Работа с почтой и выполнение задач по расписанию.
 
    [Ссылка на модуль](https://github.com/mewut/Backend-Python-Django/tree/D6)
 
