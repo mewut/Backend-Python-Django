@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
         ),
         migrations.RenameField(
             model_name='post',
-            old_name='dateCreation',
+            old_name='date_creation',
             new_name='date_creation',
         ),
         migrations.RenameField(

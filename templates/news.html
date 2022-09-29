@@ -1,7 +1,4 @@
-<!-- я все переделала тут -->
-
 {% extends 'flatpages/default.html' %}
-{% load custom_filters %}
 
 {% block title %}
 News
@@ -17,7 +14,7 @@ News
         {% for itemnews in news %}
 
             {% autoescape off %}
-            <a href="{{ itemnews.id }}" style="font-size: 20px;"><b>{{ itemnews.title|censor }}</b></a><br>
+
             {% endautoescape %}
             {% for key, value in itemnews.CATEGORY_CHOICES %}
                 {% if key == itemnews.categoryType %}
@@ -30,7 +27,7 @@ News
                 <span>{{ category.name}} </span>
             {% endfor %}
             {% autoescape off %}
-            <br>{{ itemnews.text|truncatechars:50|censor }}<br><br>
+
 
             {% endautoescape %}
         {% endfor %}
