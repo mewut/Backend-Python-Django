@@ -1,5 +1,4 @@
 ``` pip install django-filter
-pip install django-bootstrap4
 pip install django-allauth
 pip install django-apscheduler
 pip install celery
