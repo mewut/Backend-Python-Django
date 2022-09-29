@@ -5,31 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7ff21c6-d5c8-4f3f-978d-51067fd4db21" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Module_D.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsPaper/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewsPaper/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsPaper/celery.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewsPaper/celery.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsPaper/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewsPaper/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/migrations/0002_alter_category_options_and_more.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/migrations/0002_alter_category_options_and_more.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sign/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/sign/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sign/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sign/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/custom_filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/templates/custom_filters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/flatpages/default.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/flatpages/default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/news.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/news.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sign/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sign/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sign/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sign/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sign/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sign/logout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sign/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sign/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sign/update_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sign/update_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,19 +42,20 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2FJAFdCLeDUNYF3K8IRYbhvJfzx" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/user/PycharmProjects/Module_D",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/PycharmProjects/Module_D&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\user\PycharmProjects\Module_D\templates" />
