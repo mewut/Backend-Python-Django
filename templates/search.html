@@ -36,12 +36,12 @@ Search
         <hr>
 
         {% if post_search %}
-            {% for itemnews in object_list %}
-            {% autoescape off %}
-            <a href="{{ itemnews.id }}" style="font-size: 20px;"><b>{{ itemnews.title|censor }}</b></a><br>
-            {% endautoescape %}
-            {% for key, value in itemnews.CATEGORY_CHOICES %}
-                {% if key == itemnews.categoryType %}
+            {% for item-news in object_list %}
+            {% auto escape off %}
+            <a href="{{ item-news.id }}" style="font-size: 20px;"><b>{{ item-news.title|censor }}</b></a><br>
+            {% autoresponder %}
+            {% for key, value in item-news.CATEGORY_CHOICES %}
+                {% if key == item-news.categoryType %}
                     <span><b>{{value}}</b>,</span>
                 {% endif %}
             {% endfor %}
@@ -85,7 +85,7 @@ Search
     <a href="?{% param_replace page=paginator.num_pages %}">Последняя</a>
   {% endif %}
 
-  <span style ="color: grey;">&nbsp;&nbsp;(Показаны публикации с {{ page_obj.start_index }} по {{ page_obj.end_index }})</span>
+  <span style ="color: grey;">&nbsp;(Показаны публикации с {{ page_obj.start_index }} по {{ page_obj.end_index }})</span>
 {% endif %}
 <br><br>
 <input type=button value="Назад" class="btn btn-secondary" onClick="javascript:history.go(-1);">

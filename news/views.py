@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .filters import PostFilter
 from .models import Post, Author, Category, PostCategory
@@ -17,10 +18,12 @@ from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver, Signal
 from django.apps import AppConfig
 
+from .tasks import hello
+
 
 class News(ListView):
     model = Post
-    ordering = '-dateCreation', 'rating'
+    ordering = '-date_creation', 'rating'
     template_name = 'news.html'
     context_object_name = 'news'
     paginate_by = 10
@@ -41,7 +44,7 @@ class SearchList(ListView):
     model = Post
     template_name = 'search.html'
     context_object_name = 'post_search'
-    ordering = ['-dateCreation']
+    ordering = ['-date_creation']
     filter_class = PostFilter
     paginate_by = 10
 
@@ -58,16 +61,13 @@ class SearchList(ListView):
         return context
 
 
-# addpost = Signal(providing_args=['instance', 'category'])
-
-
 class PostCreate(PermissionRequiredMixin, CreateView):
     permission_required = ('news.add_post',)
     model = Post
     template_name = 'post_edit.html'
     form_class = PostForm
 
-    def form_valid(self, form):
+    def form_valid(self, form, addpost=None):
         post = form.save()
         id = post.id
         a = form.cleaned_data['postCategory']
@@ -105,7 +105,7 @@ def add_subscribe(request, pk):     # pk = id новости
     send_mail(
         subject=f'News Portal: {category_object_name}',
         message=f'Доброго дня, {request.user}! Вы подписались на уведомления о выходе новых статей в категории {category_object_name}',
-        from_email='newsportal272@gmail.com',
+        from_email='transmet97@gmail.com',
         recipient_list=[user.email, ],
     )
     return redirect(request.META.get('HTTP_REFERER'))
@@ -123,7 +123,7 @@ def del_subscribe(request, pk):
     send_mail(
         subject=f'News Portal: {category_object_name}',
         message=f'Доброго дня, {request.user}! Вы отменили уведомления о выходе новых статей в категории {category_object_name}. Нам очень жаль, что данная категория Вам не понравилась, ждем Вас снова на нашем портале!',
-        from_email='newsportal272@gmail.com',
+        from_email='transmet97@gmail.com',
         recipient_list=[user.email, ],
     )
     return redirect(request.META.get('HTTP_REFERER'))
@@ -146,3 +146,10 @@ class ProfileUserUpdate(LoginRequiredMixin, UpdateView):
     model = Author
     template_name = 'profile_edit.html'
     success_url = reverse_lazy('home')
+
+
+class IndexView(View):
+    def get(self, request):
+        hello.delay()
+        return HttpResponse('Hello!')
+    

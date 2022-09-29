@@ -71,7 +71,7 @@ class Post(models.Model):
     #    return reverse('product_detail', args=[str(self.id)])
 
     # def __str__(self):
-    #     return f'{self.title}: {self.dateCreation("%m:%d:%Y")}: {self.postCategory}'
+    #     return f'{self.title}: {self.date_creation("%m:%d:%Y")}: {self.postCategory}'
 
 
 class PostCategory(models.Model):
@@ -86,7 +86,7 @@ class Comment(models.Model):
     commentPost = models.ForeignKey(Post, on_delete=models.CASCADE)
     commentUser = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-    dateCreation = models.DateTimeField(auto_now_add=True)
+    date_creation = models.DateTimeField(auto_now_add=True)
     rating = models.SmallIntegerField(default=0)
 
     def like(self):
