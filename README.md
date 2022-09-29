@@ -3,6 +3,7 @@ pip install django-filter
 pip install django-allauth
 pip install django-apscheduler
 pip install celery
+pip install redis
 ```
 
 ## Содержание
