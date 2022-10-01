@@ -8,7 +8,7 @@ from .models import Post, Category, Author
 
 class PostFilter(FilterSet):
     category = ModelMultipleChoiceFilter(
-        field_name='postcategory__cat_thru',
+        field_name='category__cat_thru',
         queryset=Category.objects.all(),
         label='Category',
         conjoined=True,

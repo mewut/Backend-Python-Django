@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .filters import PostFilter
@@ -19,7 +19,7 @@ def news_home(request):
 
 class News(ListView):
     model = Post
-    ordering = '-dateCreation', 'rating'
+    ordering = '-created_at', 'rating'
     template_name = 'news.html'
     context_object_name = 'news'
     paginate_by = 10
@@ -32,7 +32,7 @@ class News(ListView):
 
 class SearchList(ListView):
     model = Post
-    ordering = '-dateCreation', 'rating'
+    ordering = '-created_at', 'rating'
     template_name = 'search.html'
     context_object_name = 'search'
     paginate_by = 10
