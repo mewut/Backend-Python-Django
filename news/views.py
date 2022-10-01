@@ -59,6 +59,14 @@ class PostCreate(CreateView):
     model = Post
     template_name = 'post_edit.html'
 
+    def get_initial(self):
+        user = self.request.user
+
+        if user.is_anonymous:
+            return super().get_initial()
+
+        return { 'author': self.request.user.author }
+
 
 class PostUpdate(UpdateView):
     form_class = PostForm

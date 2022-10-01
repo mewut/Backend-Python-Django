@@ -67,7 +67,7 @@ class Post(models.Model):
         return self.text[0:123] + '...'
 
     def get_absolute_url(self):
-        return reverse('product_detail', args=[str(self.id)])
+        return reverse('news:post-detail', args=[str(self.id)])
 
     # def __str__(self):
     #     return f'{self.title}: {self.created_at("%m:%d:%Y")}: {self.category}'
