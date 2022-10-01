@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('categoryType', models.CharField(choices=[('NW', 'Новость'), ('AR', 'Статья')], default='AR', max_length=2)),
-                ('dateCreation', models.DateTimeField(auto_now_add=True)),
+                ('date_creation', models.DateTimeField(auto_now_add=True)),
                 ('title', models.CharField(max_length=128)),
                 ('text', models.TextField()),
                 ('rating', models.SmallIntegerField(default=0)),
@@ -59,7 +59,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('text', models.TextField()),
-                ('dateCreation', models.DateTimeField(auto_now_add=True)),
+                ('date_creation', models.DateTimeField(auto_now_add=True)),
                 ('rating', models.SmallIntegerField(default=0)),
                 ('commentPost', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='news.post')),
                 ('commentUser', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),

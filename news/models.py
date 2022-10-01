@@ -19,7 +19,6 @@ class Author(models.Model):
         cRat = 0
         cRat += commentRat.get('commentRating')
         # суммарный рейтинг всех комментариев автора
-
         self.ratingAuthor = pRat *3 + cRat
         self.save()
         # суммарный рейтинг каждой статьи автора умножается на 3
@@ -41,7 +40,6 @@ class Category(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-
     NEWS = 'NW'
     ARTICLE = 'AR'
     CATEGORY_CHOICES = (
@@ -77,6 +75,9 @@ class CategoryPost(models.Model):
     postThrought = models.ForeignKey(Post, on_delete=models.CASCADE)
     categoryThrought = models.ForeignKey(Category, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.categoryThrough} | {self.postThrough}'
+
 
 class Comment(models.Model):
     commentPost = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -93,3 +94,5 @@ class Comment(models.Model):
         self.rating -= 1
         self.save()
 
+    def __str__(self):
+        return f'{self.commentPost} | {self.text}'

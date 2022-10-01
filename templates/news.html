@@ -1,35 +1,71 @@
 {% extends 'flatpages/default.html' %}
 
-<!-- Название -->
 {% block title %}
-Новости
+News
 {% endblock title %}
 
 {% block content %}
-    <h1>Все новости</h1>
+
+    <h1>Все статьи и новости:</h1>
+        <span style ="color: grey;">Общее количество всех публикаций на сайте: {{ paginator.count }}</span><br>
+        <span style ="color: grey;">Выведено по {{ list_in_page }} публикаций на странице, всего страниц: {{ paginator.num_pages }}</span>
+    <hr>
     {% if news %}
-        <table>
-            <tr>
-                <td> Title </td>
-                <td> Category </td>
-                <td> Author </td>
-                <td> Publish date </td>
-                <td> Text </td>
-                <td> Rating </td>
-            </tr>
-            <hr>
-            {% for new in news %}
-            <tr>
-                <td>{{ new.title }}</td>
-                <td>{{ new.category }}</td>
-                <td>{{ new.author }}</td>
-                <td>{{ new.created_at }}</td>
-                <td>{{ new.text }}</td>
-                <td>{{ new.rating }}</td>
-            </tr>
+        {% for itemnews in news %}
 
+            {% autoescape off %}
+
+            {% endautoescape %}
+            {% for key, value in itemnews.CATEGORY_CHOICES %}
+                {% if key == itemnews.categoryType %}
+                    <span><b>{{value}}</b>,</span>
+                {% endif %}
             {% endfor %}
+            <span>дата публикации: {{ itemnews.dateCreation|date:'d.M.Y' }}, рейтинг: {{ itemnews.rating }} ({{ itemnews.author }})</span><br>
+            <span>Категория: </span>
+            {% for category in itemnews.postCategory.all %}
+                <span>{{ category.name}} </span>
+            {% endfor %}
+            {% autoescape off %}
 
-        </table>
+
+            {% endautoescape %}
+        {% endfor %}
+    {% else %}
+        <h2>Новостей нет!</h2>
+    {% endif %}
+
+    <hr>
+
+
+<!-- проверка на постраничный вывод -->
+{% if is_paginated %}
+<span>Страницы: </span>
+
+    {% if page_obj.has_previous %}
+        <a href="?page=1">Первая</a><span>&nbsp;</span>
+        <a href="?page={{ page_obj.previous_page_number }}"><</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a><b>{{ page_obj.number }}</b></a><span>&nbsp;</span>
+        {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+            <a href="?page={{ num }}">{{ num }}</a><span>&nbsp;</span>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">></a><span>&nbsp;</span>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+    {% endif %}
+  <span style ="color: grey;">&nbsp;&nbsp;(Показаны публикации с {{ page_obj.start_index }} по {{ page_obj.end_index }})</span>
+{% endif %}
+<br><br>
+
+    <a href="/news/add"> <b class="btn btn-secondary"> Добавить новую публикацию </b></a>
+
+<br><br>
+
 
 {% endblock content %}
