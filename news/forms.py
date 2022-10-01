@@ -1,6 +1,36 @@
 from django import forms
 from django.core.exceptions import ValidationError
+
+from django.contrib.auth.models import User
+
 from .models import Post, User
+
+
+class ProfileUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name',
+        ]
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = [
+            'category',
+            'title',
+            'text',
+            'category_type',
+            'author',
+        ]
+
+
+class PostForms(forms.Form):
+    title = forms.CharField(label='Заголовок')
+    text = forms.CharField(label='Текст')
+    category_type = forms.ModelChoiceField(label='Метка', queryset=Post.objects.all())
+    category = forms.ModelChoiceField(label='Категория', queryset=Post.objects.all())
 
 
 class PostForm(forms.Form):

@@ -1,4 +1,7 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from datetime import datetime
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -23,14 +26,32 @@ from .tasks import hello
 
 class News(ListView):
     model = Post
-    ordering = '-date_creation', 'rating'
+    ordering = '-created_at', 'rating'
     template_name = 'news.html'
     context_object_name = 'news'
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['list_in_page'] = self.paginate_by
+        context['time_now'] = datetime.utcnow()
+        return context
+
+
+class SearchList(ListView):
+    model = Post
+    ordering = '-created_at', 'rating'
+    template_name = 'search.html'
+    context_object_name = 'search'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get.queryset()
+        self.filterset = PostFilter(self.request.GET, queryset)
+        return self.filterset.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filterset'] = self.filterset
         return context
 
 
@@ -59,6 +80,14 @@ class SearchList(ListView):
         context['list_in_page'] = self.paginate_by  # количество выведенных публикаций на странице
         context['all_posts'] = Post.objects.all()  # общее количество публикаций на сайте
         return context
+
+    def get_initial(self):
+        user = self.request.user
+
+        if user.is_anonymous:
+            return super().get_initial()
+
+        return { 'author': self.request.user.author }
 
 
 class PostCreate(PermissionRequiredMixin, CreateView):

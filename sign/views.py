@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import UpdateView
 from .forms import UpdateProfile, BaseRegisterForm
 from django.contrib.auth.models import User

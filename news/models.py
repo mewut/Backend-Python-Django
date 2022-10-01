@@ -47,8 +47,8 @@ class Post(models.Model):
         (ARTICLE, 'Статья')
     )
     category_type = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default=ARTICLE)
-    date_creation = models.DateTimeField(auto_now_add=True)
-    post_category = models.ManyToManyField(Category, through='PostCategory')
+    created_at = models.DateTimeField(auto_now_add=True)
+    category = models.ManyToManyField(Category, through='news.CategoryPost')
     title = models.CharField(max_length=128)
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
@@ -65,16 +65,13 @@ class Post(models.Model):
         return self.text[0:123] + '...'
 
     def get_absolute_url(self):
-        return f'/news/{self.id}'
-
-
-    #    return reverse('product_detail', args=[str(self.id)])
+        return reverse('news:post-detail', args=[str(self.id)])
 
     # def __str__(self):
-    #     return f'{self.title}: {self.date_creation("%m:%d:%Y")}: {self.postCategory}'
+    #     return f'{self.title}: {self.created_at("%m:%d:%Y")}: {self.category}'
 
 
-class PostCategory(models.Model):
+class CategoryPost(models.Model):
     postThrought = models.ForeignKey(Post, on_delete=models.CASCADE)
     categoryThrought = models.ForeignKey(Category, on_delete=models.CASCADE)
 
@@ -86,7 +83,7 @@ class Comment(models.Model):
     commentPost = models.ForeignKey(Post, on_delete=models.CASCADE)
     commentUser = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-    date_creation = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     rating = models.SmallIntegerField(default=0)
 
     def like(self):
