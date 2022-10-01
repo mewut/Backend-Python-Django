@@ -48,9 +48,9 @@ class Post(models.Model):
         (NEWS, 'Новость'),
         (ARTICLE, 'Статья')
     )
-    categoryType = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default=ARTICLE)
-    dateCreation = models.DateTimeField(auto_now_add=True)
-    postCategory = models.ManyToManyField(Category, through='PostCategory')
+    category_type = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default=ARTICLE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    category = models.ManyToManyField(Category, through='news.CategoryPost')
     title = models.CharField(max_length=128)
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
@@ -70,10 +70,10 @@ class Post(models.Model):
         return reverse('product_detail', args=[str(self.id)])
 
     # def __str__(self):
-    #     return f'{self.title}: {self.dateCreation("%m:%d:%Y")}: {self.postCategory}'
+    #     return f'{self.title}: {self.created_at("%m:%d:%Y")}: {self.category}'
 
 
-class PostCategory(models.Model):
+class CategoryPost(models.Model):
     postThrought = models.ForeignKey(Post, on_delete=models.CASCADE)
     categoryThrought = models.ForeignKey(Category, on_delete=models.CASCADE)
 
@@ -82,7 +82,7 @@ class Comment(models.Model):
     commentPost = models.ForeignKey(Post, on_delete=models.CASCADE)
     commentUser = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-    dateCreation = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     rating = models.SmallIntegerField(default=0)
 
     def like(self):

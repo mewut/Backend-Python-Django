@@ -1,13 +1,24 @@
 from django import forms
 from django.core.exceptions import ValidationError
+
+from django.contrib.auth.models import User
+
 from .models import Post, Author
 
+
+class ProfileUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name',
+        ]
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = [
-            'post_category',
+            'category',
             'title',
             'text',
             'category_type',
@@ -18,7 +29,7 @@ class PostForms(forms.Form):
     title = forms.CharField(label='Заголовок')
     text = forms.CharField(label='Текст')
     category_type = forms.ModelChoiceField(label='Метка', queryset=Post.objects.all())
-    post_category = forms.ModelChoiceField(label='Категория', queryset=Post.objects.all())
+    category = forms.ModelChoiceField(label='Категория', queryset=Post.objects.all())
 
     def clean(self):
         cleaned_data = super().clean()

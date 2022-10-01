@@ -21,9 +21,9 @@
             {% for new in news %}
             <tr>
                 <td>{{ new.title }}</td>
-                <td>{{ new.postCategory }}</td>
+                <td>{{ new.category }}</td>
                 <td>{{ new.author }}</td>
-                <td>{{ new.dateCreation }}</td>
+                <td>{{ new.created_at }}</td>
                 <td>{{ new.text }}</td>
                 <td>{{ new.rating }}</td>
             </tr>
