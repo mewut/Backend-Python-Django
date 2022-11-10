@@ -183,3 +183,160 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+
+ADMINS = [
+    ('admin', 'transmet97@gmail.com')
+]
+
+
+def debug_info_filter(message):
+    return message.levelname == 'DEBUG' or message.levelname == 'INFO'
+
+
+def warning_filter(message):
+    return message.levelname == 'WARNING'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'console_debug_info': {
+            'format': '{asctime} {levelname} {message}',
+            'style': '{',
+        },
+        'console_warning': {
+            'format': '{asctime} {levelname} {message} {pathname}',
+            'style': '{',
+        },
+        'console_error_critical': {
+            'format': '{asctime} {levelname} {message} {pathname} {exc_info}',
+            'style': '{',
+        },
+        'file_general_log': {
+            'format': '{asctime} {levelname} {module} {message}',
+            'style': '{',
+        },
+        'file_errors_log': {
+            'format': '{asctime} {levelname} {message} {pathname} {exc_info}',
+            'style': '{',
+        },
+        'file_security_log': {
+            'format': '{asctime} {levelname} {module} {message}',
+            'style': '{',
+        },
+        'mail_errors_log': {
+            'format': '{asctime} {levelname} {message} {pathname}',
+            'style': '{',
+        },
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'debug_info_filter': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': debug_info_filter,
+        },
+        'warning_filter': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': warning_filter,
+        },
+    },
+    'handlers': {
+        'console_debug_info': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true', 'debug_info_filter'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'console_debug_info'
+        },
+        'console_warning': {
+            'level': 'WARNING',
+            'filters': ['require_debug_true', 'warning_filter'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'console_warning'
+        },
+        'console_error_critical': {
+            'level': 'ERROR',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'console_error_critical'
+        },
+        'file_general_log': {
+            'level': 'INFO',
+            'filters': ['require_debug_false'],
+            'class': 'logging.FileHandler',
+            'filename': 'Logging/general.log',
+            'formatter': 'file_general_log'
+        },
+        'file_errors_log': {
+            'class': 'logging.FileHandler',
+            'filename': 'Logging/errors.log',
+            'formatter': 'file_errors_log'
+        },
+        'file_security_log': {
+            'class': 'logging.FileHandler',
+            'filename': 'Logging/security.log',
+            'formatter': 'file_security_log'
+        },
+        'mail_admins': {
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false'],
+            'formatter': 'mail_errors_log'
+        }
+    },
+    'loggers': {
+        'django': {
+            'level': 'DEBUG',
+            'handlers': ['console_debug_info', 'console_warning', 'console_error_critical', 'file_general_log'],
+            'propagate': True
+        },
+        'django.request': {
+            'level': 'ERROR',
+            'handlers': ['file_errors_log', 'mail_admins'],
+        },
+        'django.server': {
+            'level': 'ERROR',
+            'handlers': ['file_errors_log', 'mail_admins'],
+        },
+        'django.template': {
+            'level': 'ERROR',
+            'handlers': ['file_errors_log'],
+        },
+        'django.db_backends': {
+            'level': 'ERROR',
+            'handlers': ['file_errors_log'],
+        },
+        'django.security': {
+            'level': 'DEBUG',
+            'handlers': ['file_security_log'],
+        },
+    }
+}
+
+# В консоль должны выводиться все сообщения уровня DEBUG и выше, включающие время, уровень сообщения, сообщения.
+
+# Для сообщений WARNING и выше дополнительно должен выводиться путь к источнику события (используется аргумент pathname
+# в форматировании). А для сообщений ERROR и CRITICAL еще должен выводить стэк ошибки (аргумент exc_info). Сюда должны
+# попадать все сообщения с основного логгера django.
+
+# В файл general.log должны выводиться сообщения уровня INFO и выше только с указанием времени, уровня логирования,
+# модуля, в котором возникло сообщение (аргумент module) и само сообщение. Сюда также попадают сообщения с
+# регистратора django.
+
+# В файл errors.log должны выводиться сообщения только уровня ERROR и CRITICAL. В сообщении указывается время, уровень
+# логирования, само сообщение, путь к источнику сообщения и стэк ошибки. В этот файл должны попадать сообщения только
+# из логгеров django.request, django.server, django.template, django.db_backends.
+
+# В файл security.log должны попадать только сообщения, связанные с безопасностью, а значит только из логгера
+# django.security. Формат вывода предполагает время, уровень логирования, модуль и сообщение.
+
+# На почту должны отправляться сообщения уровней ERROR и выше из django.request и django.server по формату, как в
+# errors.log, но без стэка ошибок.
+
+# Более того, при помощи фильтров нужно указать, что в консоль сообщения отправляются только при DEBUG = True, а на
+# почту и в файл general.log — только при DEBUG = False.

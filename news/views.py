@@ -20,6 +20,8 @@ from django.apps import AppConfig
 
 from .tasks import hello
 
+from django.shortcuts import redirect, render
+
 
 class News(ListView):
     model = Post
@@ -152,4 +154,13 @@ class IndexView(View):
     def get(self, request):
         hello.delay()
         return HttpResponse('Hello!')
+
+
+def logging_page(request):
+    return render(request, 'logging_page.html')
+
+
+def test_error(request):
+    raise Exception
+    return HttpResponseRedirect(reverse('logging_page'))
     
