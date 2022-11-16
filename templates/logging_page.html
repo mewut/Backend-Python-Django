@@ -1,0 +1,20 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+
+{% block title %}TestErrors{% endblock title %}
+
+{% block content %}
+
+<div>
+  </br>
+  <h3>Тест LOGGING</h3>
+</div>
+<br><br>
+<button> <a href="{% url 'logging_page' %}">тест LOGGING DEBUG + INFO</a></button><br><br>
+
+<button> <a href="{{ request.get_full_path }}no_page">тест LOGGING WARNING</a> </button><br><br>
+
+<button> <a href="{% url 'test_error' %}">тест LOGGING ERROR</a></button><br><br>
+
+
+{% endblock content %}

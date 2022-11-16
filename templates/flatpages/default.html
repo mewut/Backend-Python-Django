@@ -11,8 +11,9 @@
 
   <title> {% block title %} {% endblock title %}</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  {% load static %}
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 
 </head>
 
@@ -67,3 +68,6 @@
 </body>
 
 </html>
+
+
+

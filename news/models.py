@@ -23,15 +23,15 @@ class Author(models.Model):
         self.save()
         # суммарный рейтинг каждой статьи автора умножается на 3
 
-    # def __str__(self):
-    #     return f'{self.authorUser.user.fullName}'
+    def __str__(self):
+        return f'{self.authorUser}'
 
 
 class Category(models.Model):
     name = models.CharField(max_length=64, unique=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
     class Meta:
         verbose_name = 'Категория'
@@ -67,11 +67,8 @@ class Post(models.Model):
     def get_absolute_url(self):
         return f'/news/{self.id}'
 
-
-    #    return reverse('product_detail', args=[str(self.id)])
-
-    # def __str__(self):
-    #     return f'{self.title}: {self.date_creation("%m:%d:%Y")}: {self.postCategory}'
+    def __str__(self):
+        return f'{self.title}: {self.date_creation("%m:%d:%Y")}: {self.postCategory}'
 
 
 class PostCategory(models.Model):
