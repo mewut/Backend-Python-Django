@@ -10,11 +10,11 @@ class PostForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
-        self.fields['author'].label = "Автор:"
-        self.fields['categoryType'].label = "Тип публикации:"
-        self.fields['postCategory'].label = "Категория:"
-        self.fields['title'].label = "Название публикации:"
-        self.fields['text'].label = "Текст публикации:"
+        self.fields['author'].label = 'Автор:'
+        self.fields['categoryType'].label = 'Тип публикации:'
+        self.fields['postCategory'].label = 'Категория:'
+        self.fields['title'].label = 'Название публикации:'
+        self.fields['text'].label = 'Текст публикации:'
 
     def clean(self):
         cleaned_data = super().clean()

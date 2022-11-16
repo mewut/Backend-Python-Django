@@ -146,7 +146,7 @@ class PostUpdateArticle(UpdateView):
 class ProfileUserUpdate(LoginRequiredMixin, UpdateView):
     form_class = ProfileUserForm
     model = Author
-    template_name = 'profile_edit.html'
+    template_name = 'update_profile.html'
     success_url = reverse_lazy('home')
 
 
